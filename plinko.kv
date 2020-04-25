@@ -34,7 +34,7 @@
 <PurchaseButton>:
     Button:
         size: 200, 20
-        text: 'Buy Weapon'
+        text: 'Buy Upgrade'
         on_press: self.parent.buybuybuy()
         pos: self.parent.pos
 
@@ -66,22 +66,23 @@
     padding:10
     spacing:200
     purchase_btn:purchase_button
-    save_layout_btn:save_layout_button
-    load_layout_btn:load_layout_button
+    #save_layout_btn:save_layout_button
+    #load_layout_btn:load_layout_button
 
     PurchaseButton:
         id: purchase_button
 
-    SaveLayoutButton:
-        id: save_layout_button
-    LoadLayoutButton:
-        id: load_layout_button
+    #SaveLayoutButton:
+    #    id: save_layout_button
+    #LoadLayoutButton:
+    #    id: load_layout_button
+
 <PachinkoGame>:
     wall:wall
-    player1: player_top
+    dropper: player_top
     menu_grid:menu_grid
     upgrade_money_display:upgrade_money_display
-    wallet_display:wallet_display
+    payout_left_display:payout_left_display
     Widget:
         pos: self.parent.pos
         id:wall
@@ -96,14 +97,14 @@
     Label:
         id:upgrade_money_display
         font_size: 70
-        center_x: root.width *3/ 4
+        center_x: root.width *4/ 5
         top: root.top - 50
         text: ""
 
     Label:
-        id:wallet_display
+        id:payout_left_display
         font_size: 70
-        center_x: root.width *3/ 4
+        center_x: root.width *4/ 5
         top: root.top - 120
         text: ""
 
