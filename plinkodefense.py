@@ -1,4 +1,5 @@
 import kivy
+from kivy.lang import Builder
 
 kivy.require('1.1.1')
 
@@ -32,6 +33,129 @@ ball_color = {
     'normal': (1, 1, 1, 1),
     'boosted': (1, 0, 0, 1)
 }
+
+# embedded kvlang
+build_holder = Builder.load_string('''
+#:kivy 1.0.9
+
+<PachinkoBall>:
+    hp_display:hp_display
+    size: 50, 50
+    canvas:
+        Color:
+            rgba:150/256, 75/256, 0, 1
+        Ellipse:
+            pos: self.pos
+            size: self.size
+    Label:
+        id: hp_display
+        font_size: 24
+        center:self.parent.center
+        color: 0, 0, 0, 1
+        text: "" if not hasattr(self.parent, 'hp') else str(self.parent.hp)
+
+<Weapon>:
+    size: 32,32
+    canvas:
+        Color:
+            rgba:0, 1, 0, 1
+        Ellipse:
+            pos: self.pos
+            size: self.size
+<PachinkoDropper>:
+    size: 200, 25
+    canvas:
+        Rectangle:
+            pos:self.pos
+            size:self.size
+
+<PurchaseButton>:
+    Button:
+        size: 200, 20
+        text: 'Buy Upgrade'
+        on_press: self.parent.buybuybuy()
+        pos: self.parent.pos
+
+<SaveLayoutButton>:
+    Button:
+        size: 200, 20
+        text: 'Save Layout'
+        on_press: self.parent.save_layout()
+        pos: self.parent.pos
+
+<LoadLayoutButton>:
+    Button:
+        size: 200, 20
+        text: 'Load Layout'
+        on_press: self.parent.load_layout()
+        pos: self.parent.pos
+<MenuGrid>:
+    pos:0,20
+    size:1366,20
+    canvas:
+        Rectangle:
+            pos:self.pos
+            size:self.size
+
+    cols:3
+    row_force_default:True
+    col_force_default:True
+    row_default_height:20
+    padding:10
+    spacing:200
+    purchase_btn:purchase_button
+    #save_layout_btn:save_layout_button
+    #load_layout_btn:load_layout_button
+
+    PurchaseButton:
+        id: purchase_button
+
+    #SaveLayoutButton:
+    #    id: save_layout_button
+    #LoadLayoutButton:
+    #    id: load_layout_button
+
+<PachinkoGame>:
+    wall:wall
+    dropper: player_top
+    menu_grid:menu_grid
+    upgrade_money_display:upgrade_money_display
+    payout_left_display:payout_left_display
+    Widget:
+        pos: self.parent.pos
+        id:wall
+        canvas:
+            Rectangle:
+                pos: self.center_x, 0
+                size: 10, self.parent.height
+    MenuGrid:
+        id:menu_grid
+
+
+    Label:
+        id:upgrade_money_display
+        font_size: 70
+        center_x: root.width *4/ 5
+        top: root.top - 50
+        text: ""
+
+    Label:
+        id:payout_left_display
+        font_size: 70
+        center_x: root.width *4/ 5
+        top: root.top - 120
+        text: ""
+
+
+    PachinkoDropper:
+        id: player_top
+        y: root.height-self.height
+        #center_x: root.center_x
+
+
+
+
+''')
 
 
 class PachinkoDropper(Widget):
