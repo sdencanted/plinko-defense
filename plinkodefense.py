@@ -284,7 +284,7 @@ class PachinkoGame(Widget):
                 self.weapon.center = self.min_weapon.center
 
         # serve a ball every 5 seconds
-        if self.last_served + 1 < time():
+        if self.last_served + 1 < time() and self.payout_left > 0:
             self.last_served = time()
 
             # ball health increases with each drop
